@@ -2,4 +2,4 @@ __py*
 .DS_Store
 .venv/
 content/draft
-
+output/
