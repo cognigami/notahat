@@ -33,7 +33,7 @@ jobs:
 
       - name: Build Pelican Site
         run: |
-          pelican content -s pelicanconf.py
+          pelican content -s publishconf.py
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5.0.0
