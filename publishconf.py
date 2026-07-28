@@ -11,7 +11,7 @@ sys.path.append(os.curdir)
 from pelicanconf import *
 
 # If your site is available via HTTPS, make sure SITEURL begins with https://
-SITEURL = 'https://qrg.dev'
+SITEURL = 'https://cognigami.github.io'
 RELATIVE_URLS = True
 
 FEED_DOMAIN = SITEURL
