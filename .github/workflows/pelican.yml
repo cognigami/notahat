@@ -23,7 +23,6 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5.1.1 
         with:
-          # Pin explicitly to 3.13 to avoid unreleased 3.14 runtime errors
           python-version: '3.13'
 
       - name: Install Dependencies
@@ -41,6 +40,8 @@ jobs:
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'output/'
 
       - name: Deploy to GitHub Pages
         id: deployment
