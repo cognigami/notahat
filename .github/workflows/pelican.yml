@@ -4,19 +4,46 @@ on:
     branches: ["main"]
   workflow_dispatch:
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-#concurrency:
-#  group: "pages"
-#  cancel-in-progress: false
+permissions:
+  contents: "read"
+  pages: "write"
+  id-token: "write"
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   deploy:
-    uses: "getpelican/pelican/.github/workflows/github_pages.yml@main"
-    permissions:
-      contents: "read"
-      pages: "write"
-      id-token: "write"
-    with:
-      settings: "pelicanconf.py"
-      requirements: "-r requirements.txt"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pelican[markdown]
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Build Pelican Site
+        run: |
+          pelican content -s pelicanconf.py
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'output/'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
