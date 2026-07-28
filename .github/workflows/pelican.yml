@@ -23,8 +23,9 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5.1.1 
         with:
-          python-version: '3.x'
-  
+          # Pin explicitly to 3.13 to avoid unreleased 3.14 runtime errors
+          python-version: '3.13'
+
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
