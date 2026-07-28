@@ -18,10 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Source Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2 
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v5.1.1 
         with:
           python-version: '3.x'
           cache: 'pip'
@@ -37,12 +37,10 @@ jobs:
           pelican content -s pelicanconf.py
 
       - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v5.0.0
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
-        with:
-          path: 'output/'
 
       - name: Deploy to GitHub Pages
         id: deployment
