@@ -36,7 +36,7 @@ jobs:
           pelican content -s publishconf.py
 
       - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5.0.0
+        uses: actions/configure-pages@v6.0.0
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
